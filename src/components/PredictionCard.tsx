@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { TrendingUp, ChartLine } from 'lucide-react';
+import { predictionModels } from '@/data/memeData';  // Import directly using ES modules syntax
 
 type PredictionCardProps = {
   title: string;
@@ -98,9 +98,7 @@ const PredictionCard = ({
 };
 
 const PredictionGrid = () => {
-  // Import the prediction models data
-  const { predictionModels } = require('@/data/memeData');
-
+  // Use the imported prediction models directly
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Viral Predictions</h2>
