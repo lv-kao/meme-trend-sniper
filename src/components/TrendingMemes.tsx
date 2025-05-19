@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, ChartLine } from 'lucide-react';
 import { MemeTrend, trendingMemeData } from '@/data/memeData';
 
 const TrendingMemeCard = ({ meme }: { meme: MemeTrend }) => {
@@ -21,9 +21,23 @@ const TrendingMemeCard = ({ meme }: { meme: MemeTrend }) => {
         <CardTitle className="text-lg mt-2">{meme.title}</CardTitle>
         <CardDescription>
           Viral Potential: <span className="font-bold text-primary">{meme.viralPotential}%</span>
+          {meme.velocity && (
+            <> • Velocity: <span className={`font-bold ${meme.velocity > 50000 ? 'text-trendingGreen' : 'text-muted-foreground'}`}>
+              {(meme.velocity / 1000).toFixed(1)}k/hr
+            </span></>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>
+        {meme.viewCount1h && meme.viewCount3h && (
+          <div className="flex justify-between text-xs text-muted-foreground mb-3">
+            <div>1h: {(meme.viewCount1h / 1000).toFixed(0)}k views</div>
+            <div>3h: {(meme.viewCount3h / 1000).toFixed(0)}k views</div>
+            <div className={meme.isViral ? "text-trendingGreen font-medium" : "text-muted-foreground"}>
+              {meme.isViral ? "Viral" : "Monitoring"}
+            </div>
+          </div>
+        )}
         <div className="flex justify-between text-sm text-muted-foreground mb-3">
           <div>Views: {meme.views.toLocaleString()}</div>
           <div>Likes: {meme.likes.toLocaleString()}</div>
